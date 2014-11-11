@@ -14,11 +14,16 @@ var PairForm = React.createClass({
         });
 
         return (
-            <form className="form" role="form" onSubmit={this.handleSubmit} >
-            {JSON.stringify(PairStore.getAll())}
-                    {this.pairs}
-                <button onClick={this.addNewPair} className="btn btn-primary"> + Add Pair</button>
-                <button type="submit" className="btn btn-info">Randomize</button>
+            <form className="form-horizontal" role="form" onSubmit={this.handleSubmit} >
+                {this.pairs}
+                <div className="row">
+                    <div className="col-md-offset-2 col-md-1">
+                        <button onClick={this.addNewPair} className="btn btn-primary"> + Add Pair</button>
+                    </div>
+                    <div className="col-md-2">
+                        <button type="submit" className="btn btn-info">Randomize</button>
+                    </div>
+                </div>
             </form>
         );
     },

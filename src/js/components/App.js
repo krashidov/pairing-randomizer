@@ -39,7 +39,7 @@ var App = React.createClass({
     var pairs = PairStore.getAll();
     return (
       <div className="container">
-        <h1>Hello, welcome to {this.state.title}!</h1>
+        <h1>Hello, welcome to the {this.state.title}!</h1>
         <PairForm></PairForm>
         <Results></Results>
       </div>

@@ -35,20 +35,23 @@ var Results = React.createClass({
                         <td>{result[1]}</td>
                     </tr>);
         });
-        return (
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Dev 1 Name</th>
-                        <th>Dev 2 Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {results}
-                </tbody>
-            </table>
-        );
+        if(this.state.results.length > 0){
+            return (
+                <table className="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Dev 1 Name</th>
+                            <th>Dev 2 Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {results}
+                    </tbody>
+                </table>
+            );
+        }
+        return (<div></div>);
     }
 });
 

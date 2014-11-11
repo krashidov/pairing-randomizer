@@ -25818,7 +25818,7 @@ var PairStore = require('../stores/PairStore');
 var Pair = React.createClass({displayName: 'Pair',
     render: function() {
         return (
-            React.DOM.div({className: "row", onKeyPress: this.handleKeyPress}, 
+            React.DOM.div({className: "form-group", onKeyPress: this.handleKeyPress}, 
                 React.DOM.label({className: "col-sm-2 control-label"}, "Pair ", this.props.pairNumber, ":"), 
                 React.DOM.div({className: "col-md-4"}, 
                     React.DOM.input({type: "text", className: "form-control", value: this.props.pairOne, ref: "pair0", onChange: this.handleChange, autoFocus: true})
@@ -25891,7 +25891,7 @@ var App = React.createClass({displayName: 'App',
     var pairs = PairStore.getAll();
     return (
       React.DOM.div({className: "container"}, 
-        React.DOM.h1(null, "Hello, welcome to ", this.state.title, "!"), 
+        React.DOM.h1(null, "Hello, welcome to the ", this.state.title, "!"), 
         PairForm(null), 
         Results(null)
       )
@@ -25921,11 +25921,16 @@ var PairForm = React.createClass({displayName: 'PairForm',
         });
 
         return (
-            React.DOM.form({className: "form", role: "form", onSubmit: this.handleSubmit}, 
-            JSON.stringify(PairStore.getAll()), 
-                    this.pairs, 
-                React.DOM.button({onClick: this.addNewPair, className: "btn btn-primary"}, " + Add Pair"), 
-                React.DOM.button({type: "submit", className: "btn btn-info"}, "Randomize")
+            React.DOM.form({className: "form-horizontal", role: "form", onSubmit: this.handleSubmit}, 
+                this.pairs, 
+                React.DOM.div({className: "row"}, 
+                    React.DOM.div({className: "col-md-offset-2 col-md-1"}, 
+                        React.DOM.button({onClick: this.addNewPair, className: "btn btn-primary"}, " + Add Pair")
+                    ), 
+                    React.DOM.div({className: "col-md-2"}, 
+                        React.DOM.button({type: "submit", className: "btn btn-info"}, "Randomize")
+                    )
+                )
             )
         );
     },
@@ -25991,20 +25996,23 @@ var Results = React.createClass({
                         React.DOM.td(null, result[1])
                     ));
         });
-        return (
-            React.DOM.table({className: "table"}, 
-                React.DOM.thead(null, 
-                    React.DOM.tr(null, 
-                        React.DOM.th(null, "#"), 
-                        React.DOM.th(null, "Dev 1 Name"), 
-                        React.DOM.th(null, "Dev 2 Name")
+        if(this.state.results.length > 0){
+            return (
+                React.DOM.table({className: "table"}, 
+                    React.DOM.thead(null, 
+                        React.DOM.tr(null, 
+                            React.DOM.th(null, "#"), 
+                            React.DOM.th(null, "Dev 1 Name"), 
+                            React.DOM.th(null, "Dev 2 Name")
+                        )
+                    ), 
+                    React.DOM.tbody(null, 
+                        results
                     )
-                ), 
-                React.DOM.tbody(null, 
-                    results
                 )
-            )
-        );
+            );
+        }
+        return (React.DOM.div(null));
     }
 });
 

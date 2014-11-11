@@ -7,7 +7,7 @@ var PairStore = require('../stores/PairStore');
 var Pair = React.createClass({
     render: function() {
         return (
-            <div className="row" onKeyPress={this.handleKeyPress}>
+            <div className="form-group" onKeyPress={this.handleKeyPress}>
                 <label className="col-sm-2 control-label">Pair {this.props.pairNumber}:</label>
                 <div className="col-md-4">
                     <input type="text" className="form-control" value={this.props.pairOne} ref="pair0" onChange={this.handleChange} autoFocus></input>
