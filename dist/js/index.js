@@ -26086,6 +26086,9 @@ function editPair(index, pairs){
 
 function randomizePairs(){
     var randomList = _.shuffle(_.flatten(_data));
+    var randomList = _.filter(randomList, function(element){
+        return element !== '';
+    })
     var pairSize = 2;
     results = [];
 
