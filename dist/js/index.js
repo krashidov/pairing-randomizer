@@ -26092,6 +26092,10 @@ function editPair(index, pairs){
     _data[index] = pairs;
 }
 
+function isExistingPair(pair) {
+    return ( _.contains(pair, _data) || _.contains([pair[1], pair[0]], _data));
+}
+
 function randomizePairs(){
     var randomList = _.shuffle(_.flatten(_data));
     var randomList = _.filter(randomList, function(element){
@@ -26102,7 +26106,7 @@ function randomizePairs(){
 
     for(var i =0;  i< randomList.length; i+=2){
         randomPair =  randomList.slice(i, i + pairSize);
-        if (_.contains(randomPair, _data)){
+        if (isExistingPair(randomPair)){
             randomList = _.shuffle(randomList);
             i = 0;
             break;
@@ -26110,12 +26114,6 @@ function randomizePairs(){
         results.push(randomPair);
     }
     _results = results;
-}
-
-function pairsAreDuplicate(pairs){
-    _.forEach(pairs, function(){
-
-    })
 }
 
 var PairStore = merge(EventEmitter.prototype, {
