@@ -33,6 +33,7 @@ function randomizePairs(){
         randomPair =  randomList.slice(i, i + pairSize);
         if (isExistingPair(randomPair)){
             randomList = _.shuffle(randomList);
+            i = 0;
         }
         else {
             results.push(randomPair);
