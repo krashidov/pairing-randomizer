@@ -26080,7 +26080,6 @@ function editPair(index, pairs){
 }
 
 function isExistingPair(pair) {
-    debugger;
     return _.find(_data, function(element) {
        return (_.isEqual(element, pair) || _.isEqual(element, [pair[1],pair[0]])); 
     });
@@ -26098,6 +26097,7 @@ function randomizePairs(){
         randomPair =  randomList.slice(i, i + pairSize);
         if (isExistingPair(randomPair)){
             randomList = _.shuffle(randomList);
+            i = 0;
         }
         else {
             results.push(randomPair);
