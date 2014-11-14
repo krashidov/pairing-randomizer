@@ -16,7 +16,9 @@ function editPair(index, pairs){
 }
 
 function isExistingPair(pair) {
-    return ( _.contains(pair, _data) || _.contains([pair[1], pair[0]], _data));
+    return _.find(_data, function(element) {
+       return (_.isEqual(element, pair) || _.isEqual(element, [pair[1],pair[0]])); 
+    });
 }
 
 function randomizePairs(){
@@ -26,15 +28,16 @@ function randomizePairs(){
     })
     var pairSize = 2;
     results = [];
-
-    for(var i =0;  i< randomList.length; i+=2){
+    var i = 0;
+    while(i < randomList.length){
         randomPair =  randomList.slice(i, i + pairSize);
         if (isExistingPair(randomPair)){
             randomList = _.shuffle(randomList);
-            i = 0;
-            break;
         }
-        results.push(randomPair);
+        else {
+            results.push(randomPair);
+            i += 2;
+        }
     }
     _results = results;
 }

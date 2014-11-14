@@ -26,8 +26,6 @@ var Results = React.createClass({
   },
 
     render: function () {
-        debugger;
-        // return (<div>{this.state.results}</div>);
         var results = this.state.results.map(function(result, index) {
             return (<tr>
                         <td>{index + 1}</td>

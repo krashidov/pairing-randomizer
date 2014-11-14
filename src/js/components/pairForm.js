@@ -40,12 +40,7 @@ var PairForm = React.createClass({
     handleSubmit: function(){
         event.preventDefault();
         DataActionCreators.randomize();
-    },
-
-    handleKeyPress: function(event) {
-        debugger;
     }
-
 });
 
 module.exports = PairForm;

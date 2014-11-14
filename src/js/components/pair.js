@@ -25,14 +25,8 @@ var Pair = React.createClass({
 
     handleChange: function() {
         PairStore.getAll();
-        debugger;
         DataActionCreators.editPair(this.props.pairNumber-1, this.focus());
-    },
-
-    handleKeyPress: function(event) {
-        debugger;
     }
-
 });
 
 module.exports = Pair;

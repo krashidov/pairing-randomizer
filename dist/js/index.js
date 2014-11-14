@@ -25836,14 +25836,8 @@ var Pair = React.createClass({displayName: 'Pair',
 
     handleChange: function() {
         PairStore.getAll();
-        debugger;
         DataActionCreators.editPair(this.props.pairNumber-1, this.focus());
-    },
-
-    handleKeyPress: function(event) {
-        debugger;
     }
-
 });
 
 module.exports = Pair;
@@ -25947,12 +25941,7 @@ var PairForm = React.createClass({displayName: 'PairForm',
     handleSubmit: function(){
         event.preventDefault();
         DataActionCreators.randomize();
-    },
-
-    handleKeyPress: function(event) {
-        debugger;
     }
-
 });
 
 module.exports = PairForm;
@@ -25987,8 +25976,6 @@ var Results = React.createClass({
   },
 
     render: function () {
-        debugger;
-        // return (<div>{this.state.results}</div>);
         var results = this.state.results.map(function(result, index) {
             return (React.DOM.tr(null, 
                         React.DOM.td(null, index + 1), 
@@ -26093,7 +26080,10 @@ function editPair(index, pairs){
 }
 
 function isExistingPair(pair) {
-    return ( _.contains(pair, _data) || _.contains([pair[1], pair[0]], _data));
+    debugger;
+    return _.find(_data, function(element) {
+       return (_.isEqual(element, pair) || _.isEqual(element, [pair[1],pair[0]])); 
+    });
 }
 
 function randomizePairs(){
@@ -26103,15 +26093,16 @@ function randomizePairs(){
     })
     var pairSize = 2;
     results = [];
-
-    for(var i =0;  i< randomList.length; i+=2){
+    var i = 0;
+    while(i < randomList.length){
         randomPair =  randomList.slice(i, i + pairSize);
         if (isExistingPair(randomPair)){
             randomList = _.shuffle(randomList);
-            i = 0;
-            break;
         }
-        results.push(randomPair);
+        else {
+            results.push(randomPair);
+            i += 2;
+        }
     }
     _results = results;
 }
