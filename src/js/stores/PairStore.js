@@ -6,7 +6,7 @@ var _ = require('lodash');
 
 var _data = [['','']];
 var _results = [];
-// add private functions to modify data
+
 function addPair() {
     _data.push(['','']);
 }
@@ -15,33 +15,31 @@ function editPair(index, pairs){
     _data[index] = pairs;
 }
 
-function isExistingPair(pair) {
-    return _.find(_data, function(element) {
-       return (_.isEqual(element, pair) || _.isEqual(element, [pair[1],pair[0]])); 
-    });
-}
-
-function randomizePairs(){
-    var randomList = _.shuffle(_.flatten(_data));
-    var randomList = _.filter(randomList, function(element){
-        return element !== '';
-    })
-    var pairSize = 2;
-    results = [];
-    var i = 0;
-    while(i < randomList.length){
-        randomPair =  randomList.slice(i, i + pairSize);
-        if (isExistingPair(randomPair)){
-            randomList = _.shuffle(randomList);
-            i = 0;
-        }
-        else {
-            results.push(randomPair);
-            i += 2;
-        }
+var emptyPairName = '__emptyPair__';
+function pairExists (possibleDuplicatePair, pairs) {
+  return _.find(pairs, function(pair) {
+    return _.isEqual(pair, possibleDuplicatePair);
+  });
+};
+function randomizePairs() {
+  var i, pairSize, randomList, randomPair, results;
+  randomList = _.shuffle(_.flatten(_data));
+  pairSize = 2;
+  results = [];
+  i = 0;
+  while (i < randomList.length) {
+    randomPair = randomList.slice(i, i + pairSize);
+    if (pairExists(randomPair, _data)) {
+      randomList = _.shuffle(randomList);
+      i = 0;
+      results = [];
+      continue;
     }
-    _results = results;
-}
+    results.push(randomPair);
+    i += 2;
+  }
+  _results = results;
+};
 
 var PairStore = merge(EventEmitter.prototype, {
 
